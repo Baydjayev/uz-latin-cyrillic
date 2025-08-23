@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uz Latin ↔ Кирилл Konvertor</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      background: #a8f0a5; /* ochiq yashil */
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      text-align: center;
+      width: 90%;
+      max-width: 700px;
+    }
+
+    h1 {
+      color: #2b572b;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+    }
+
+    textarea {
+      width: 90%;
+      max-width: 600px;
+      height: 120px;
+      margin: 10px 0;
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      font-size: 1rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      resize: none;
+    }
+
+    button {
+      margin: 10px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #fff;
+      background: #4facfe;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #00c6ff;
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Uzbekcha Lotin ↔ Кирилл</h1>
+    
+    <textarea id="inputText" placeholder="Matn kiriting..."></textarea>
+    
+    <div>
+      <button onclick="toCyrillic()">Lotindan Кириллга</button>
+      <button onclick="toLatin()">Кирилдан Lotinga</button>
+    </div>
+    
+    <textarea id="outputText" placeholder="Natija shu yerda chiqadi..." readonly></textarea>
+  </div>
+
+  <script>
+    // Lotin → Кирилл
+    function toCyrillic() {
+      let text = document.getElementById("inputText").value;
+      let rules = {
+        "sh": "ш", "ch": "ч", "ya": "я", "yo": "ё", "yu": "ю",
+        "o'": "ў", "g'": "ғ", "ng": "нг",
+        "a": "а","b": "б","d": "д","e": "е","f": "ф","g": "г","h": "ҳ",
+        "i": "и","j": "ж","k": "к","l": "л","m": "м","n": "н","o": "о",
+        "p": "п","q": "қ","r": "р","s": "с","t": "т","u": "у","v": "в",
+        "x": "х","y": "й","z": "з","ʼ":"ъ","'":"ъ"
+      };
+      text = text.toLowerCase();
+      for (let key in rules) {
+        text = text.split(key).join(rules[key]);
+      }
+      document.getElementById("outputText").value = text;
+    }
+
+    // Кирилл → Lotin
+    function toLatin() {
+      let text = document.getElementById("inputText").value;
+      let rules = {
+        "ш":"sh","ч":"ch","я":"ya","ё":"yo","ю":"yu",
+        "ў":"o'","ғ":"g'","нг":"ng",
+        "а":"a","б":"b","д":"d","е":"e","ф":"f","г":"g","ҳ":"h",
+        "и":"i","ж":"j","к":"k","л":"l","м":"m","н":"n","о":"o",
+        "п":"p","қ":"q","р":"r","с":"s","т":"t","у":"u","в":"v",
+        "х":"x","й":"y","з":"z","ъ":"ʼ"
+      };
+      text = text.toLowerCase();
+      for (let key in rules) {
+        text = text.split(key).join(rules[key]);
+      }
+      document.getElementById("outputText").value = text;
+    }
+  </script>
+</body>
+</html>
